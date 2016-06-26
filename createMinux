@@ -1,0 +1,15 @@
+#!/bin/bash
+set -xev
+clang -v
+if [[ $? != 0 ]] ; then
+  echo "you have to install clang"
+  exit 1
+fi
+rm -fr minux-temp
+mkdir -p minux-temp/sbin/
+mkdir -p minux-temp/etc/
+touch minux-temp/etc/os-release
+clang -static -nostdinc -stdlib=$MUSL/lib/ -L$MUSL/lib/ -I$MUSL/include/ -I$MUSL/arch/ -B$MUSL/lib init.c -o init
+mv init minux-temp/sbin/init
+rm -fr minux
+mv minux-temp minux
