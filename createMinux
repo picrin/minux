@@ -1,10 +1,5 @@
 #!/bin/bash
 set -xev
-clang -v
-if [[ $? != 0 ]] ; then
-  echo "you have to install clang"
-  exit 1
-fi
 rm -fr minux-temp
 mkdir -p minux-temp/sbin/
 mkdir -p minux-temp/etc/
